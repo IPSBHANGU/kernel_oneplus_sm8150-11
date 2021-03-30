@@ -27,6 +27,8 @@
 #include "fg-reg.h"
 #include "fg-alg.h"
 
+#include <linux/power/oem_external_fg.h>
+
 #define FG_GEN4_DEV_NAME	"qcom,fg-gen4"
 #define TTF_AWAKE_VOTER		"fg_ttf_awake"
 
@@ -176,6 +178,8 @@
 #define CC_SOC_OFFSET			0
 #define MONOTONIC_SOC_WORD		463
 #define MONOTONIC_SOC_OFFSET		0
+
+static struct external_battery_gauge *external_fg;
 
 /* v2 SRAM address and offset in ascending order */
 #define LOW_PASS_VBATT_WORD		3
@@ -346,6 +350,24 @@ static int fg_sram_dump_period_ms = 20000;
 module_param_named(
 	sram_dump_period_ms, fg_sram_dump_period_ms, int, 0600
 );
+
+void external_battery_gauge_register(struct external_battery_gauge
+				*batt_gauge)
+{
+	if (external_fg) {
+		external_fg = batt_gauge;
+		pr_err("multiple battery gauge called\n");
+	} else
+		external_fg = batt_gauge;
+}
+EXPORT_SYMBOL(external_battery_gauge_register);
+
+void external_battery_gauge_unregister(struct external_battery_gauge
+				*batt_gauge)
+{
+	external_fg = NULL;
+}
+EXPORT_SYMBOL(external_battery_gauge_unregister);
 
 static int fg_restart_mp;
 static bool fg_sram_dump;
