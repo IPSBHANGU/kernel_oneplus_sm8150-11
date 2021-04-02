@@ -32,7 +32,7 @@
 #include <linux/highmem.h>
 #include "binder_alloc.h"
 #include "binder_trace.h"
-#include <../coretech/uxcore/opchain_helper.h>
+//#include <oneplus/uxcore/opchain_helper.h>
 #ifdef CONFIG_OP_FREEZER
 // add for op freeze manager
 #include <oneplus/op_freezer/op_freezer.h>
@@ -1161,7 +1161,7 @@ void binder_alloc_pass_binder_buffer(struct binder_alloc *alloc,
 	page = binder_alloc_get_page(alloc, buffer,
 						0, &pgoff);
 	kptr = kmap_atomic(page) + pgoff;
-	opc_binder_pass(buffer_size, kptr, 1);
+//	opc_binder_pass(buffer_size, kptr, 1);
 	kunmap_atomic(kptr);
 }
 

@@ -1,7 +1,6 @@
-/* SPDX-License-Identifier: GPL-2.0 */
 #ifndef _LINUX_OPCHAIN_HELPER_H
 #define _LINUX_OPCHAIN_HELPER_H
-#include <linux/oem/opchain_define.h>
+#include "opchain_define.h"
 
 #ifdef CONFIG_OPCHAIN
 extern struct opchain_cb uxcore_api;
@@ -32,14 +31,11 @@ static inline bool is_opc_task(struct task_struct *t, int type) { return 0; }
 static inline void opc_task_switch(bool enqueue, int cpu, struct task_struct *p, u64 clock) {}
 static inline int opc_get_claim_on_cpu(int cpu) { return 0; }
 static inline unsigned int opc_get_claims(void) { return 0; }
-static inline int opc_select_path(struct task_struct *cur,
-			struct task_struct *t, int prev_cpu) { return OP_PATH_NORMAL; }
-static inline unsigned long opc_cpu_util(unsigned long util,
-			int cpu, struct task_struct *t, int op_path) { return util; }
-static inline bool opc_fps_check(int lvl) { return false; }
+static inline int opc_select_path(struct task_struct *cur, struct task_struct *t, int prev_cpu) { return OP_PATH_NORMAL; }
+static inline unsigned long opc_cpu_util(unsigned long util, int cpu, struct task_struct *t, int op_path) { return util; }
+static inline bool opc_fps_check(int lvl) { return false;}
 static inline void opc_add_to_chain(struct task_struct *t) {}
 static inline bool opc_check_uxtop_cpu(int uxtop, int cpu) { return true; }
 static inline void opc_set_boost(unsigned int val) {};
 #endif
 #endif
-

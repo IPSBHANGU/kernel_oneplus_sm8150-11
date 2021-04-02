@@ -71,7 +71,7 @@
 #include "internal.h"
 
 #include <trace/events/sched.h>
-#include <linux/oem/im.h>
+//#include <linux/oem/im.h>
 #ifdef CONFIG_ADJ_CHAIN
 #include <linux/oem/adj_chain.h>
 #endif
@@ -1245,7 +1245,6 @@ void __set_task_comm(struct task_struct *tsk, const char *buf, bool exec)
 	task_lock(tsk);
 	trace_task_rename(tsk, buf);
 	strlcpy(tsk->comm, buf, sizeof(tsk->comm));
-	im_wmi(tsk);
 	task_unlock(tsk);
 	perf_event_comm(tsk, exec);
 }
@@ -1358,7 +1357,7 @@ void setup_new_exec(struct linux_binprm * bprm)
 			current->signal->rlim[RLIMIT_STACK].rlim_cur = _STK_LIM;
 	}
 
-	arch_pick_mmap_layout(current->mm);
+	special_arch_pick_mmap_layout(current->mm);
 
 	current->sas_ss_sp = current->sas_ss_size = 0;
 

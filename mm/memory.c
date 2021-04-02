@@ -3184,9 +3184,6 @@ int do_swap_page(struct vm_fault *vmf)
 		goto out_release;
 	}
 
-#ifdef CONFIG_MEMPLUS
-	memplus_next_event(page);
-#endif
 	/*
 	 * Make sure try_to_free_swap or reuse_swap_page or swapoff did not
 	 * release the swapcache from under us.  The page pin, and pte_same

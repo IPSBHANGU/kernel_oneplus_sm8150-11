@@ -27,7 +27,7 @@ static struct component_info component_info_desc[COMPONENT_MAX];
 static struct kobject *project_info_kobj;
 static struct project_info *project_info_desc;
 static struct dump_info *dp_info;
-extern void *panic_info;
+void *panic_info = NULL;
 
 static struct kobject *component_info;
 static ssize_t project_info_get(struct device *dev,

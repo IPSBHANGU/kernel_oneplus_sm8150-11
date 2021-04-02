@@ -83,7 +83,7 @@ static unsigned long mmap_base(unsigned long rnd)
  * This function, called very early during the creation of a new process VM
  * image, sets up which VM layout function to use:
  */
-void arch_pick_mmap_layout(struct mm_struct *mm)
+void special_arch_pick_mmap_layout(struct mm_struct *mm)
 {
 	unsigned long random_factor = 0UL;
 
